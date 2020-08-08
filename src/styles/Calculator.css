@@ -1,0 +1,83 @@
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  align-items: center;
+  display: flex;
+  /* height: 100vh; */
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  /* background: linear-gradient(pink, blue); */
+}
+
+.calculator {
+  /* display: inline-block; */
+  /* height: 40vh;
+  width: 30vh; */
+  border: 2.5px solid gold;
+  border-radius: 10px;
+  /* background-color: royalblue; */
+  padding: 5px;
+  background: linear-gradient(pink, blue);
+}
+
+button {
+  font-size: 1.5rem;
+  padding: 10px;
+  margin: 5px;
+  border: 2.5px solid black;
+  border-radius: 5px;
+}
+
+.display {
+  /* height: 20%; */
+  height: 3.5rem;
+  font-size: 2rem;
+  padding: 10px;
+  margin: 5px;
+  background-color: black;
+  color: white;
+  padding-right: 0.5rem;
+  text-align: right;
+  overflow: hidden;
+  border: 2.5px solid black;
+  border-radius: 5px;
+}
+
+.keypad {
+  /* height: 80%; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.operand {
+  background-color: black;
+  color: white;
+}
+
+.operand:hover,
+.operator:hover {
+  background-color: gray;
+  color: white;
+}
+
+.equals:hover {
+  background-color: greenyellow;
+  color: white;
+}
+
+.admin {
+  background-color: orange;
+  border-color: none;
+}
+
+.admin:hover {
+  background-color: orangered;
+}
+
+.equals {
+  background-color: orangered;
+}
