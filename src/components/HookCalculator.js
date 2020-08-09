@@ -51,7 +51,7 @@ const HookCalculator = () => {
                     <button className="admin" onClick={() => { setExpression(""); setAnswer("") }}>AC</button>
                     <button className="admin" onClick={() => deleter()}>DEL</button>
 
-                    <button className="admin" onClick={()=> console.log(history)}>ANS</button>
+                    <button className="admin" onClick={()=> console.log(history)}>?</button>
 
                     <button className="operator" onClick={()=> myOperatorSetter("÷")}>÷</button>
 
@@ -74,7 +74,7 @@ const HookCalculator = () => {
                     <button className="operand" onClick={()=> myOperandSetter("0")}>0</button>
 
                     {/* <button className="operand" onClick={() => this.setParentheses()}>()</button>     */}
-                    <button className="operand" onClick={() => console.log(history)}>()</button>  
+                    <button className="operand" onClick={() => console.log(history)}>HIS</button>  
                     <button className="equals" onClick={() => equals()}>=</button>
                 </div>
             </div>

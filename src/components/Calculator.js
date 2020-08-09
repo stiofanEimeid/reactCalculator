@@ -13,7 +13,13 @@ class Calculator extends React.Component {
     }
 
     parseWithSubtraction = entry => {
-        const expressionArr = entry.split("-");
+        // replace all instances of - without preceding e with another character to handle scientific notation
+        // const expressionArr = entry.split("-");
+
+        const regex = /(?<!e)-/g;
+        const cleanedExp = entry.replace(regex, "!")
+        const expressionArr = cleanedExp.split("!");
+
         const convertedArr = expressionArr.map((x) => Number(x));
         return convertedArr.reduce((x, y) => x - y);  
     }
@@ -47,11 +53,12 @@ class Calculator extends React.Component {
 
         // determine what sort of operation came first and apply correct procedure
         } else if(multiplyRegex.test(exp.match(testRegex))){
-            const matchOne = exp.match(multiplyRegex).join("");
-            const resOne = exp.replace(matchOne, this.parseWithMultiplication(matchOne))
+            const matchOne = exp.match(multiplyRegex);
+            console.log(matchOne);
+            const resOne = exp.replace(matchOne[0], this.parseWithMultiplication(matchOne[0]))
             return this.recurser(resOne);
         } else {
-            const matchTwo = exp.match(divideRegex).join("");
+            const matchTwo = exp.match(divideRegex)[0];
             const resTwo = exp.replace(matchTwo, this.parseWithDivision(matchTwo))
             return this.recurser(resTwo);
         }
@@ -66,8 +73,15 @@ class Calculator extends React.Component {
         // const newExp = memoizedFunc(exp);
 
         const newExp = this.recurser(exp);
+        // const expressionArr = newExp.split("+");
 
-        const expressionArr = newExp.split("+");
+        // replace all instances of + without preceding e with another character to handle scientific notation
+        // (?<!a)b matches a “b” that is not preceded by an “a”,
+        const regex = /(?<!e)\+/g;
+
+        const cleanedExp = newExp.replace(regex, "!")
+        const expressionArr = cleanedExp.split("!");
+
         // subtraction parser converts string entries to numbers while applying subtraction operation if necessary
         const convertedArr = expressionArr.map((x) => this.parseWithSubtraction(x));
         // leaving remaining characters to be added together
@@ -105,31 +119,59 @@ class Calculator extends React.Component {
         }
       }
 
-    resolveParthenses = (exp) => {
-        // look for match
-        const testRegex = (/[(][-]*[\d|.]+[x|÷][-]*[\d|.]+[)]/);
-        // test regex for multiplcation
+    // resolveParthenses = (exp) => {
+    //     // look for match
+    //     const testRegex = (/[(][-]*[\d|.]+[x|÷][-]*[\d|.]+[)]/);
+    //     // test regex for multiplcation
+    //     // if regex opens but doesn't end, remove it
         
-        // if match found:
+    //     // if match found:
+    //     if(testRegex.test(exp)){
+    //         const match = exp.match(testRegex).slice(1, exp.length).join("");
+    //         const result = exp.replace(match, this.parseWithAddition(match));
+    //         return this.resolveParthenses(result);
+    //     } else {
+    //         return this.parseWithAddition(exp);
+    //     }
+    //     //  take match and call resolve parethenses on match in case of further brackets
+    //     // else:
+    //     //  call parseWithAddition(exp)
+    // }
+
+    // resolveParenthenses = (exp) => {
+    //     const testRegex = /\(([^)]+)\)/;
+    //     if(testRegex.test(exp)){
+    //         const match = exp.match(testRegex);
+    //         console.log(match[0]);
+    //         const result = exp.replace(match[1], this.parseWithAddition(match[0]));
+    //         return this.resolveParenthenses(result);
+
+    //     } else {
+    //         return this.parseWithAddition(exp);
+    //     }
+    // }
+
+    resolveParentheses = (exp) => {
+        const testRegex = /\(([^)]+)\)/;
+        // only opening p
         if(testRegex.test(exp)){
-            const match = exp.match(testRegex).slice(1, exp.length).join("");
-            const result = exp.replace(match, this.parseWithAddition(match));
-            return this.resolveParthenses(result);
-        } else {
+            const match = exp.match(testRegex);
+            const result = exp.replace(match[0], this.parseWithAddition(match[1]));
+            return this.resolveParentheses(result);
+        } 
+        // else if(false){
+
+        // }
+        else {
             return this.parseWithAddition(exp);
         }
-        //  take match and call resolve parethenses on match in case of further brackets
-        // else:
-        //  call parseWithAddition(exp)
     }
-
-    
 
     equals = () => {
         const myExpression = this.state.expression;
         // const memoizedFunc = this.memoizer(this.parseWithAddition);
         // const result = memoizedFunc(myExpression);
-        const result = this.parseWithAddition(myExpression);
+        const result = this.resolveParentheses(myExpression);
         this.setState({
             expression: result + "",
             answer: true,

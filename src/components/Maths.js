@@ -1,5 +1,8 @@
 export const parseWithSubtraction = (entry) => {
-    const expressionArr = entry.split("-");
+    // const expressionArr = entry.split("-");
+    const regex = /(?<!e)-/g;
+    const cleanedExp = entry.replace(regex, "!")
+    const expressionArr = cleanedExp.split("!");
     const convertedArr = expressionArr.map((x) => Number(x));
     return convertedArr.reduce((x, y) => x - y);
   };
@@ -45,7 +48,9 @@ export const parseWithSubtraction = (entry) => {
     // memoiser would go here
     // order of operations: resolve expressions that include x or ÷ in string
     const newExp = recurser(exp);
-    const expressionArr = newExp.split("+");
+    // const expressionArr = newExp.split("+"); d
+    const cleanedExp = newExp.replace(/(?<!e)\+/g, "!")
+    const expressionArr = cleanedExp.split("!");
     // subtraction parser converts string entries to numbers while applying subtraction operation if necessary
     const convertedArr = expressionArr.map((x) => parseWithSubtraction(x));
     // leaving remaining characters to be added together

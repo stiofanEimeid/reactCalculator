@@ -11,17 +11,20 @@ body {
   justify-content: center;
   font-family: "Roboto", sans-serif;
   /* background: linear-gradient(pink, blue); */
+  /* background: linear-gradient(#9ec6ff, #0d4b32); */
+  background-color: lightgray;
+  margin: 0;
 }
 
 .calculator {
   /* display: inline-block; */
   /* height: 40vh;
   width: 30vh; */
-  border: 2.5px solid gold;
+  border: 2.5px solid #ffdf00;
   border-radius: 10px;
   /* background-color: royalblue; */
   padding: 5px;
-  background: linear-gradient(pink, blue);
+  background: linear-gradient(#d47d97, #877fa8);
 }
 
 button {
@@ -35,6 +38,7 @@ button {
 .display {
   /* height: 20%; */
   height: 3.5rem;
+  max-width: 305px;
   font-size: 2rem;
   padding: 10px;
   margin: 5px;
@@ -42,7 +46,7 @@ button {
   color: white;
   padding-right: 0.5rem;
   text-align: right;
-  overflow: hidden;
+  overflow: scroll;
   border: 2.5px solid black;
   border-radius: 5px;
 }
@@ -58,14 +62,17 @@ button {
   color: white;
 }
 
-.operand:hover,
+.operand:hover {
+  background-color: white;
+  color: black;
+}
 .operator:hover {
   background-color: gray;
   color: white;
 }
 
 .equals:hover {
-  background-color: greenyellow;
+  background-color: #32cd32;
   color: white;
 }
 
@@ -75,9 +82,12 @@ button {
 }
 
 .admin:hover {
-  background-color: orangered;
+  background-color: #0080ff;
+  color: white;
 }
 
 .equals {
   background-color: orangered;
 }
+
+/* media queries for galaxy fold */
