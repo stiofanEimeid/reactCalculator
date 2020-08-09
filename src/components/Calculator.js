@@ -9,6 +9,7 @@ class Calculator extends React.Component {
         answer: true,
         history: [],
         operator: false,
+        open: false,
     }
 
     parseWithSubtraction = entry => {
@@ -30,6 +31,8 @@ class Calculator extends React.Component {
     }
 
     // handles order of precedence
+
+    // candidate for memoization
 
     recurser = exp => {
         // memoisation?
@@ -58,7 +61,12 @@ class Calculator extends React.Component {
     parseWithAddition = exp => {
         // memoiser would go here
         // order of operations: resolve expressions that include x or ÷ in string
+
+        // const memoizedFunc = this.memoizer(this.recurser);
+        // const newExp = memoizedFunc(exp);
+
         const newExp = this.recurser(exp);
+
         const expressionArr = newExp.split("+");
         // subtraction parser converts string entries to numbers while applying subtraction operation if necessary
         const convertedArr = expressionArr.map((x) => this.parseWithSubtraction(x));
@@ -68,8 +76,59 @@ class Calculator extends React.Component {
 
     // parsing ends 
 
+    // memoizer = (fn) => {
+    //     const cache = {};
+    //     console.log("memoizer accessed", cache)
+    //     return function(...args){
+    //         if(cache[args]){
+    //             console.log("retrieve cache entry")
+    //             return cache[args]
+    //         }
+    //         console.log("apply function");
+    //         const result = fn.apply(this, args);
+    //         cache[args] = result;
+    //         return result;
+    //     }
+    // }
+
+    memoizer = (func) => {
+        const cache = {};
+        console.log("memoizer accessed", cache);
+        return function() {
+          const key = JSON.stringify(arguments)
+          if(!(key in cache)){
+            console.log("apply", cache);
+            cache[key] = func.apply(null, arguments)
+          }
+          console.log("retrieve", cache);
+          return cache[key]
+        }
+      }
+
+    resolveParthenses = (exp) => {
+        // look for match
+        const testRegex = (/[(][-]*[\d|.]+[x|÷][-]*[\d|.]+[)]/);
+        // test regex for multiplcation
+        
+        // if match found:
+        if(testRegex.test(exp)){
+            const match = exp.match(testRegex).slice(1, exp.length).join("");
+            const result = exp.replace(match, this.parseWithAddition(match));
+            return this.resolveParthenses(result);
+        } else {
+            return this.parseWithAddition(exp);
+        }
+        //  take match and call resolve parethenses on match in case of further brackets
+        // else:
+        //  call parseWithAddition(exp)
+    }
+
+    
+
     equals = () => {
         const myExpression = this.state.expression;
+        // const memoizedFunc = this.memoizer(this.parseWithAddition);
+        // const result = memoizedFunc(myExpression);
         const result = this.parseWithAddition(myExpression);
         this.setState({
             expression: result + "",
@@ -99,6 +158,21 @@ class Calculator extends React.Component {
             })
         }
     }
+
+    setParentheses = () => {
+        console.log("hi")
+        if(!this.state.open){
+            this.setState({
+                expression: `${this.state.expression}(`,
+                open: true
+            });
+        } else {
+            this.setState({
+                expression: `${this.state.expression})`,
+                open: false
+            });
+        }
+    }  
 
     delete = () => {
         const result = this.state.expression.split('').slice(0, this.state.expression.length - 1).join('');
@@ -141,7 +215,8 @@ class Calculator extends React.Component {
                     <button className="operand" onClick={()=> this.myOperatorSetter(".")}>.</button>
                     <button className="operand" onClick={()=> this.myOperandSetter("0")}>0</button>
 
-                    <button className="operand" onClick={() => console.log(this.state.history)}>()</button>    
+                    {/* <button className="operand" onClick={() => this.setParentheses()}>()</button>     */}
+                    <button className="operand" onClick={() => console.log(this.state.history)}>()</button>  
                     <button className="equals" onClick={() => this.equals()}>=</button>
                 </div>
             </div>
