@@ -1,0 +1,53 @@
+.history,
+.display {
+  height: 5rem;
+  overflow: auto;
+  max-width: 205px;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.history {
+  background-color: #f1faee;
+  font-size: 1rem;
+  border: 2.5px solid #f1faee;
+  text-align: left;
+  color: #1d3557;
+}
+
+.display {
+  font-size: 2rem;
+  background-color: #f1faee;
+  color: #1d3557;
+  text-align: right;
+  border: 2.5px solid #f1faee;
+}
+
+.historyTitle {
+  font-size: 0.75rem;
+}
+
+.historyEntry {
+  border-bottom: 2px dashed #1d3557;
+  margin-top: 5px;
+  padding-bottom: 5px;
+}
+
+.expression {
+  text-align: left;
+}
+
+@media only screen and (min-width: 375px) {
+  .history,
+  .display {
+    max-width: 300px;
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  .history,
+  .display {
+    max-width: 305px;
+  }
+}

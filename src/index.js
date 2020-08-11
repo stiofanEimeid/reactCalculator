@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-// import Calculator from "./components/Calculator";
-import HookCalculator from "./components/HookCalculator";
+import Calculator from "./components/Calculator";
 
 const App = () => {
     return (
         <Fragment>
-            <HookCalculator />
+            <Calculator />
         </Fragment>
     );
 }

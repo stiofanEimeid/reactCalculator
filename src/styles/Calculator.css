@@ -1,93 +1,86 @@
 body,
-html {
+html,
+#root {
   height: 100%;
   width: 100%;
-}
-
-body {
-  align-items: center;
-  display: flex;
-  /* height: 100vh; */
-  justify-content: center;
-  font-family: "Roboto", sans-serif;
-  /* background: linear-gradient(pink, blue); */
-  /* background: linear-gradient(#9ec6ff, #0d4b32); */
-  background-color: lightgray;
   margin: 0;
 }
 
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  background-color: lightgray;
+  margin: 0;
+  min-height: 100%;
+}
+
 .calculator {
-  /* display: inline-block; */
-  /* height: 40vh;
-  width: 30vh; */
-  border: 2.5px solid #ffdf00;
-  border-radius: 10px;
-  /* background-color: royalblue; */
-  padding: 5px;
-  background: linear-gradient(#d47d97, #877fa8);
+  border: 2.5px solid lightgray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 10px;
+  background-color: #235789;
 }
 
 button {
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   padding: 10px;
   margin: 5px;
-  border: 2.5px solid black;
-  border-radius: 5px;
-}
-
-.display {
-  /* height: 20%; */
-  height: 3.5rem;
-  max-width: 305px;
-  font-size: 2rem;
-  padding: 10px;
-  margin: 5px;
-  background-color: black;
-  color: white;
-  padding-right: 0.5rem;
-  text-align: right;
-  overflow: scroll;
-  border: 2.5px solid black;
+  border: 2.5px solid #191919;
   border-radius: 5px;
 }
 
 .keypad {
-  /* height: 80%; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.operand {
-  background-color: black;
+.operand,
+.operator:hover {
+  background-color: #191919;
   color: white;
+  border-color: rgb(20, 20, 20);
 }
 
+.operator,
 .operand:hover {
   background-color: white;
   color: black;
+  border-color: whitesmoke;
 }
-.operator:hover {
-  background-color: gray;
-  color: white;
+
+.admin {
+  background-color: #f7c548;
+  border-color: #f6bc28;
+}
+
+.admin:hover {
+  background-color: #191919;
+  color: #f7c548;
+  border-color: black;
+}
+
+.equals {
+  border-color: #cc5803;
+  background-color: #ff6201;
 }
 
 .equals:hover {
   background-color: #32cd32;
   color: white;
+  border-color: #2fa52f;
 }
 
-.admin {
-  background-color: orange;
-  border-color: none;
+@media only screen and (min-width: 375px) {
+  button {
+    font-size: 1.25rem;
+  }
 }
 
-.admin:hover {
-  background-color: #0080ff;
-  color: white;
+@media only screen and (min-width: 414px) {
+  button {
+    font-size: 1.5rem;
+  }
 }
-
-.equals {
-  background-color: orangered;
-}
-
-/* media queries for galaxy fold */
