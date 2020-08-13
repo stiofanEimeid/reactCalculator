@@ -16,7 +16,7 @@ export const parseWithMultiplication = (entry) => {
 };
 
 export const parseWithDivision = (entry) => {
-  const expressionArr = entry.split("Ã·");
+  const expressionArr = entry.split("!");
   const convertedArr = expressionArr.map((x) => Number(x));
   return convertedArr.reduce((x, y) => x / y);
 };
@@ -27,9 +27,9 @@ export const orderOfPre = (exp) => {
   // in scientific notation or otherwise, followed by the division operator,
   // followed by a signed or unsigned oeprand of variable length,
   // again in scientific notation or otherwise.
-  const testRegex = /[-]*[\d|.]+(?:[e][+-]\d+)?[xÃ·][-]*[\d|.]+(?:[e][+-]\d+)?/g;
+  const testRegex = /[-]*[\d|.]+(?:[e][+-]\d+)?[x÷][-]*[\d|.]+(?:[e][+-]\d+)?/g;
   const multiplyRegex = /[-]*[\d|.]+(?:[e][+-]\d+)?[x][-]*[\d|.]+(?:[e][+-]\d+)?/g;
-  const divideRegex = /[-]*[\d|.]+(?:[e][+-]\d+)?[Ã·][-]*[\d|.]+(?:[e][+-]\d+)?/g;
+  const divideRegex = /[-]*[\d|.]+(?:[e][+-]\d+)?[÷][-]*[\d|.]+(?:[e][+-]\d+)?/g;
 
   if (!testRegex.test(exp)) {
     return exp;
@@ -53,9 +53,9 @@ export const parseWithAddition = (exp) => {
   const newExp = orderOfPre(
     exp
       .replace(/(?<=x)\+{1,}/g, "")
-      .replace(/(?<=Ã·)\+{1,}/g, "")
+      .replace(/(?<=÷)\+{1,}/g, "")
       .replace(/(?<=x)-{2}/g, "")
-      .replace(/(?<=Ã·)-{2}/g, "")
+      .replace(/(?<=÷)-{2}/g, "")
       .replace(/-{2}/g, "+")
       .replace(/"-+"|"+-"/g, "-")
   );
