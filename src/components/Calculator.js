@@ -6,9 +6,13 @@ import Screen from "./Screen";
 const Calculator = () => {
   const [expression, setExpression] = useState("");
   const [answer, setAnswer] = useState("");
-  // Initialise list containing history of user input
-  // list includes further information on errors
-  // users may encounter in calculations e.g. if result was NaN.
+
+  {/* 
+    Initialise list containing history of user input
+    list includes further information on errors
+    users may encounter in calculations e.g. if result was NaN.
+  */} 
+
   const [history, setHistory] = useState([]);
   // Display answer on Screen component.
   const [display, setDisplay] = useState(false);
@@ -17,8 +21,10 @@ const Calculator = () => {
 
   // Helper functions
   const myOperandSetter = (e) => {
-    // Clear screen if answer is being displayed
-    // before setting operand.
+    {/*
+      Clear screen if answer is being displayed
+      before setting operand.
+    */}
     if (display) {
       setExpression(e.target.textContent);
       setDisplay(false);
@@ -28,8 +34,10 @@ const Calculator = () => {
   };
 
   const myAnswerSetter = (opd) => {
-    // Clear screen if answer is being displayed
-    // before setting operand.
+    {/*
+      Clear screen if answer is being displayed
+      before setting operand.  
+    */} 
     if (display) {
       setExpression(opd);
       setDisplay(false);
