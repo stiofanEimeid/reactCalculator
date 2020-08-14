@@ -16,7 +16,18 @@ const Calculator = () => {
   const [tab, setTab] = useState(false);
 
   // Helper functions
-  const myOperandSetter = (opd) => {
+  const myOperandSetter = (e) => {
+    // Clear screen if answer is being displayed
+    // before setting operand.
+    if (display) {
+      setExpression(e.target.textContent);
+      setDisplay(false);
+    } else {
+      setExpression(`${expression}${e.target.textContent}`);
+    }
+  };
+
+  const myAnswerSetter = (opd) => {
     // Clear screen if answer is being displayed
     // before setting operand.
     if (display) {
@@ -81,7 +92,7 @@ const Calculator = () => {
             DEL
           </button>
 
-          <button className="admin" onClick={() => myOperandSetter(answer)}>
+          <button className="admin" onClick={() => myAnswerSetter(answer)}>
             ANS
           </button>
 
@@ -89,48 +100,48 @@ const Calculator = () => {
             {setButtonName()}
           </button>
 
-          <button className="operand" onClick={() => myOperandSetter("7")}>
+          <button className="operand" onClick={myOperandSetter}>
             7
           </button>
-          <button className="operand" onClick={() => myOperandSetter("8")}>
+          <button className="operand" onClick={myOperandSetter}>
             8
           </button>
-          <button className="operand" onClick={() => myOperandSetter("9")}>
+          <button className="operand" onClick={myOperandSetter}>
             9
           </button>
           <button className="operator" onClick={myOperatorSetter}>
           ÷
           </button>
 
-          <button className="operand" onClick={() => myOperandSetter("4")}>
+          <button className="operand" onClick={myOperandSetter}>
             4
           </button>
-          <button className="operand" onClick={() => myOperandSetter("5")}>
+          <button className="operand" onClick={myOperandSetter}>
             5
           </button>
-          <button className="operand" onClick={() => myOperandSetter("6")}>
+          <button className="operand" onClick={myOperandSetter}>
             6
           </button>
           <button className="operator" onClick={myOperatorSetter}>
             x
           </button>
 
-          <button className="operand" onClick={() => myOperandSetter("1")}>
+          <button className="operand" onClick={myOperandSetter}>
             1
           </button>
-          <button className="operand" onClick={() => myOperandSetter("2")}>
+          <button className="operand" onClick={myOperandSetter}>
             2
           </button>
-          <button className="operand" onClick={() => myOperandSetter("3")}>
+          <button className="operand" onClick={myOperandSetter}>
             3
           </button>
           <button className="operator" onClick={myOperatorSetter}>
             -
           </button>
-          <button className="operand" onClick={() => myOperandSetter("0")}>
+          <button className="operand" onClick={myOperandSetter}>
             0
           </button>
-          <button className="operand" onClick={() => myOperandSetter(".")}>
+          <button className="operand" onClick={myOperandSetter}>
             .
           </button>
 
