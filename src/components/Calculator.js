@@ -27,13 +27,13 @@ const Calculator = () => {
     }
   };
 
-  const myOperatorSetter = (opr) => {
+  const myOperatorSetter = (e) => {
     // Add operator to answer if it displayed.
     if (display) {
-      setExpression(`${answer}${opr}`);
+      setExpression(`${answer}${e.target.textContent}`);
       setDisplay(false);
     } else {
-      setExpression(`${expression}${opr}`);
+      setExpression(`${expression}${e.target.textContent}`);
     }
   };
 
@@ -77,7 +77,7 @@ const Calculator = () => {
           >
             AC
           </button>
-          <button className="admin" onClick={() => removeLast()}>
+          <button className="admin" onClick={removeLast}>
             DEL
           </button>
 
@@ -98,7 +98,7 @@ const Calculator = () => {
           <button className="operand" onClick={() => myOperandSetter("9")}>
             9
           </button>
-          <button className="operator" onClick={() => myOperatorSetter("÷")}>
+          <button className="operator" onClick={myOperatorSetter}>
           ÷
           </button>
 
@@ -111,7 +111,7 @@ const Calculator = () => {
           <button className="operand" onClick={() => myOperandSetter("6")}>
             6
           </button>
-          <button className="operator" onClick={() => myOperatorSetter("x")}>
+          <button className="operator" onClick={myOperatorSetter}>
             x
           </button>
 
@@ -124,20 +124,20 @@ const Calculator = () => {
           <button className="operand" onClick={() => myOperandSetter("3")}>
             3
           </button>
-          <button className="operator" onClick={() => myOperatorSetter("-")}>
+          <button className="operator" onClick={myOperatorSetter}>
             -
           </button>
           <button className="operand" onClick={() => myOperandSetter("0")}>
             0
           </button>
-          <button className="operand" onClick={() => myOperatorSetter(".")}>
+          <button className="operand" onClick={() => myOperandSetter(".")}>
             .
           </button>
 
-          <button className="equals" onClick={() => equals()}>
+          <button className="equals" onClick={equals}>
             =
           </button>
-          <button className="operator" onClick={() => myOperatorSetter("+")}>
+          <button className="operator" onClick={myOperatorSetter}>
             +
           </button>
         </div>
